@@ -3,13 +3,13 @@ function triangle_menu(){
     $items['triangle'] = array(
         'title'=>'Triangle Sides',
         'page callback' => 'drupal_get_form',
-        'page argument' => array('triangle_form'),
+        'page arguments' => array('triangle_form'),
         'access callback' => TRUE,
         'type' => MENU_NORMAL_ITEM,
     );
 
     $items['triangulate'] = array(
-        'title' => 'Triangle',
+        'title' => 'Triangle!',
         'page callback' => 'tricalculator',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
