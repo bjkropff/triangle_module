@@ -50,20 +50,20 @@ function triangle_form_submit($form, &$form_state) {
     $triangulate = "";
 
     if ($side1 + $side2 < $side3 || $side2 + $side1 < $side3 || $side3 + $side2 < $side1) {
-        $triangulate = "Not a triangle"
+        $triangulate = "Not a triangle";
     } elseif ($side2 == $side1 && $side2 == $side3) {
-        $triangulate = "Equalateral Triangle"
+        $triangulate = "Equalateral Triangle";
     } elseif ($side2 == $side1 || $side2 == $side3 || $side1 == $side3) {
-        $triangulate = "Isosceles Triangle"
+        $triangulate = "Isosceles Triangle";
     } elseif (($side2*$side2) + ($side1*$side1) == ($side3*$side3)) {
-        $triangulate = "Right Triangle"
+        $triangulate = "Right Triangle";
     } else {
-        $triangulate = "Scalene Triangle"
+        $triangulate = "Scalene Triangle";
     }
 
     $_SESSION['triangle_result'] = $triangulate;
 
-    $form_state['redirect'] = ''
+    $form_state['redirect'] = 'triangulate';
 }
 
 function tricalculator() {
