@@ -7,6 +7,14 @@ function triangle_menu(){
         'access callback' => TRUE,
         'type' => MENU_NORMAL_ITEM,
     );
+
+    $items['triangulate'] = array(
+        'title' => 'Triangle',
+        'page callback' => 'tricalculator',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
     return $items;
 }
 
@@ -42,21 +50,23 @@ function triangle_form_submit($form, &$form_state) {
     $triangulate = "";
 
     if ($side1 + $side2 < $side3 || $side2 + $side1 < $side3 || $side3 + $side2 < $side1) {
-        return "Not a triangle"
+        $triangulate = "Not a triangle"
     } elseif ($side2 == $side1 && $side2 == $side3) {
-        return "Equalateral Triangle"
+        $triangulate = "Equalateral Triangle"
     } elseif ($side2 == $side1 || $side2 == $side3 || $side1 == $side3) {
-        return "Isosceles Triangle"
+        $triangulate = "Isosceles Triangle"
     } elseif (($side2*$side2) + ($side1*$side1) == ($side3*$side3)) {
-        return "Right Triangle"
+        $triangulate = "Right Triangle"
     } else {
-        return "Scalene Triangle"
+        $triangulate = "Scalene Triangle"
     }
 
     $_SESSION['triangle_result'] = $triangulate;
+
+    $form_state['redirect'] = ''
 }
 
-function queen_attack() {
+function tricalculator() {
     $answer = $_SESSION['triangle_result'];
     return $answer;
 }
