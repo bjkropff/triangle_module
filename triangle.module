@@ -1,0 +1,62 @@
+<?php
+function triangle_menu(){
+    $items['triangle'] = array(
+        'title'=>'Triangle Sides',
+        'page callback' => 'drupal_get_form',
+        'page argument' => array('triangle_form'),
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function triangle_form() {
+    $form['side1'] = array(
+        '#title' => 'Side 1',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the first side of your triangle'),
+        '#element_validate' => array('element_validate_number'),
+        '#required' => TRUE,
+    );
+
+    $form['side2'] = array(
+        '#title' => 'Side 2',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the second side of your triangle'),
+        '#element_validate' => array('element_validate_number'),
+        '#required' => TRUE,
+    );
+    $form['side3'] = array(
+        '#title' => 'Side 3',
+        '#type' => 'textfield',
+        '#description' => t('Please enter the third side of your triangle'),
+        '#element_validate' => array('element_validate_number'),
+        '#required' => TRUE,
+    );
+}
+
+function triangle_form_submit($form, &$form_state) {
+    $side1 = $form_state['values']['side1'];
+    $side2 = $form_state['values']['side2'];
+    $side3 = $form_state['values']['side3'];
+    $triangulate = "";
+
+    if ($side1 + $side2 < $side3 || $side2 + $side1 < $side3 || $side3 + $side2 < $side1) {
+        return "Not a triangle"
+    } elseif ($side2 == $side1 && $side2 == $side3) {
+        return "Equalateral Triangle"
+    } elseif ($side2 == $side1 || $side2 == $side3 || $side1 == $side3) {
+        return "Isosceles Triangle"
+    } elseif (($side2*$side2) + ($side1*$side1) == ($side3*$side3)) {
+        return "Right Triangle"
+    } else {
+        return "Scalene Triangle"
+    }
+
+    $_SESSION['triangle_result'] = $triangulate;
+}
+
+function queen_attack() {
+    $answer = $_SESSION['triangle_result'];
+    return $answer;
+}
