@@ -41,6 +41,11 @@ function triangle_form() {
         '#element_validate' => array('element_validate_number'),
         '#required' => TRUE,
     );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Is this a triangle?',
+    );
     return $form;
 
 }
